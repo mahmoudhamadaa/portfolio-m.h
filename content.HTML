@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.H</title>
+    <link rel="shortcut icon" href="./assets/image/iconmh.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="./assets/css/stylesm.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(./assets/image/2.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            line-height: 1.6;
+            background-color: black;
+            color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    height: auto;
+    width: 93%;
+    max-width: 1600px;
+    margin: 10px auto;
+    background: rgba(41, 40, 41, 0.49);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 253, 253, 0.5);
+
+}
+        .ad {
+            background: linear-gradient(60deg, #a658c8, #f0e0f1);
+            background-size: cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            mask-size: cover;
+            position: absolute;
+            top: 155px;
+            left: 45%;
+            font-size: 23px;
+        }
+        .info {
+            white-space: nowrap;
+            position: absolute; 
+            left: 10%;
+        }
+        p {
+            font-size: 25px;
+            font-weight: bold;
+            color: #d8a1f0;
+            text-decoration: underline;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ffffff5b;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #77737963;
+            margin-bottom: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #c58de5;
+            color: #fbfbfb;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #57116c;
+        }
+        .map-container {
+            width: 100%;
+            height: 300px; /* قم بتحديد ارتفاع الخريطة حسب الحاجة */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- <video autoplay muted loop class="video-background">
+        <source src="./assets/image/bg.mp4" type="video/mp4">
+    </video> -->
+    <header>
+        <div class="logo">
+            <img src="./assets/image/Mhlogo.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="index.html#one">Home</a>
+            <a href="index.html#tow">About me</a>
+            <a href="index.html#three">My Prog</a>
+            <a href="index.html#four">Service</a>
+            <a href="content.HTML" class="cont">CONTENT</a>
+        </nav>
+    </header>
+    <div class="marquee">
+        <br><br>
+        <img src="./assets/image/Mhlogo.png" alt="" width="300px" height="10px">
+    </div>
+    <div class="container">
+        <form action="" method="">
+            <div class="ad">
+                <h2>CONTENT Me</h2>
+            </div>
+            <br><br><br>
+            <div id="map" class="map-container"></div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name..." required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your Mail..." required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your Message..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <footer>
+        <div class="wave"></div>
+        <div class="footer-content">
+            <div class="social-item">
+                <a href="https://www.facebook.com/mahmoud.mohamed" class="social-link">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/mahmoud.mohamed" class="social-link">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+                <a href="https://www.linkedin.com/in/mahmoud-mohamed-647440172" class="social-link">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+                <a href="https://wa.me/201069715039" class="social-link">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                </a>
+            </div>
+            <nav>
+                <a href="index.html#one">Home</a>
+                <a href="index.html#tow">About me</a>
+                <a href="index.html#three">My Prog</a>
+                <a href="index.html#four">Service</a>
+                <a href="content.HTML">CONTENT</a>
+            </nav>
+            <span>© 2024 MAHMOUD-HAMDA</span>
+        </div>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // إعداد الخريطة
+        var map = L.map('map').setView([26.612761709785712, 31.772027171848585], 13); // استخدم الإحداثيات الخاصة بموقعك
+
+        // إضافة طبقة للخرائط
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // إضافة علامة للموقع
+        L.marker([26.612761709785712, 31.772027171848585]).addTo(map) // استخدم الإحداثيات الخاصة بموقعك
+            .openPopup();
+    </script>
+</body>
+</html>
